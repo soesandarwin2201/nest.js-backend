@@ -1,4 +1,5 @@
 import { IsNotEmpty,IsPhoneNumber, IsEmail, Length, Validate} from "class-validator"
+import { PasswordValidator } from "src/utility/auth/password.validator"
 
 
 export class RegisterInput{
@@ -12,5 +13,6 @@ export class RegisterInput{
    phone: string
 
    @IsNotEmpty({ message: "Password is required"})
+   @Validate(PasswordValidator, { message: "Password need to match with requirement"})
    password: string
 }
