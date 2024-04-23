@@ -34,6 +34,7 @@ export class AuthLogin{
          verificationCodeExpiresAt: expiresAt,
        },
        { new: true },)
+       console.log(res)
        return {
          success: true,
          message: 'Verification code sent to your phone',

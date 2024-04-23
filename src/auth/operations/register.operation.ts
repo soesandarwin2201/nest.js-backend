@@ -40,6 +40,7 @@ export class Register{
 
    try {
       const savedUser = await createUser.save;
+      console.log(savedUser)
       return {
          success: true,
         message: 'Verification code sent to your phone',
