@@ -11,7 +11,7 @@ export class AuthController {
 
    @Post('register')
    async register(@Body() input: RegisterInput):Promise<AuthResponse>{
-      return true
+      return  await this.authService.register(input)
    }
 
 }
