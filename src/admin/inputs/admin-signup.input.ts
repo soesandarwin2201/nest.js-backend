@@ -2,9 +2,9 @@ import { IsNotEmpty,IsPhoneNumber, IsEmail, Length, Validate,} from "class-valid
 import { PasswordValidator } from "src/utility/auth/password.validator"
 
 export class AdminSignUpInput{
-   @IsNotEmpty({ message: "Name is required"})
-   @Length(3,20,{ message: "Name must be between 6 to 20 characters"})
-   fullName: string
+   @IsNotEmpty({ message: "FullName is required"})
+   @Length(3,20,{ message: "FullName must be between 6 to 20 characters"})
+   name: string
 
    @IsNotEmpty({ message: "Email is required"})
    @IsEmail(null, { message: "Invalid Email address"})

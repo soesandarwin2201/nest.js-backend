@@ -17,12 +17,12 @@ import { generateVerificationCode } from "src/utility/auth/utilities";
 export class AdminSignUp{
    constructor(@InjectModel(User.name) private readonly userModel: Model<UserDocument>){}
 
-   async adminSignUp(adminInput: AdminSignUpInput):Promise<AdminAuthResponse>{
-      const findEmail = this.userModel.findOne({email: adminInput.email}).select('email').exec()
+   async signUp(adminInput: AdminSignUpInput):Promise<AdminAuthResponse>{
+      const findEmail =await  this.userModel.findOne({email: adminInput.email}).select('email').exec()
       if(findEmail){
          throw new BadRequestException('Email already existed')
       }
-      const findPhone = this.userModel.findOne({ phone: adminInput.phone}).select('phone').exec()
+      const findPhone =await this.userModel.findOne({ phone: adminInput.phone}).select('phone').exec()
        if(findPhone) {
          throw new BadRequestException('Phone already existed')
        }
@@ -32,13 +32,14 @@ export class AdminSignUp{
    const expiresAt = addMinutes(new Date(), 10);
    const verificationCode = generateVerificationCode();
    const createAdmin = new this.userModel({
+      fullName: adminInput.name,
       ...adminInput,
     password: hashedPassword,
     verificationCode: verificationCode,
     verificationCodeExpiresAt: expiresAt,
    })
    try{
-      const savedAdmin = createAdmin.save()
+      const savedAdmin =await  createAdmin.save()
       console.log(savedAdmin)
       return {
          success: true,
@@ -47,6 +48,7 @@ export class AdminSignUp{
 
    }catch(error){
       if (error instanceof mongoose.Error) {
+         console.log(error)
          throw new HttpException(
            error.message,
            HttpStatus.INTERNAL_SERVER_ERROR,

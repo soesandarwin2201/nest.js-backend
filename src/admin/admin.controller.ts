@@ -1,4 +1,17 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
+import { AdminService } from './admin.service';
+import { ApiTags } from '@nestjs/swagger';
+import { AdminSignUpInput } from './inputs/admin-signup.input';
+import { AdminAuthResponse } from './dto/adminAuthResponse';
 
+@ApiTags('Admin')
 @Controller('admin')
-export class AdminController {}
+export class AdminController {
+   constructor(readonly adminService: AdminService){
+   }
+
+   @Post('signup')
+   async adminSignup(@Body() input: AdminSignUpInput):Promise<AdminAuthResponse>{
+      return this.adminService.signUp(input)
+   }
+}
