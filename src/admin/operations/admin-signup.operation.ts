@@ -7,7 +7,7 @@ import {
  import mongoose, { Model } from 'mongoose';
 import { AdminSignUpInput } from '../inputs/admin-signup.input';
 import { InjectModel } from "@nestjs/mongoose";
-import { User, UserDocument } from "src/users/models/users.model";
+import { Admin, AdminDocument } from '../models/admins.model';
 import { AdminAuthResponse } from '../dto/adminAuthResponse';
 import * as bcrypt from 'bcrypt';
 import { addMinutes } from "date-fns";
@@ -15,7 +15,7 @@ import { generateVerificationCode } from "src/utility/auth/utilities";
 
 @Injectable()
 export class AdminSignUp{
-   constructor(@InjectModel(User.name) private readonly userModel: Model<UserDocument>){}
+   constructor(@InjectModel(Admin.name) private readonly userModel: Model<AdminDocument>){}
 
    async signUp(adminInput: AdminSignUpInput):Promise<AdminAuthResponse>{
       const findEmail =await  this.userModel.findOne({email: adminInput.email}).select('email').exec()

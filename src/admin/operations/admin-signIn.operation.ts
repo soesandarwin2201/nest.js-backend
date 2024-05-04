@@ -4,7 +4,7 @@ import {
    Injectable,
  } from '@nestjs/common';
  import mongoose, { Model } from 'mongoose';
- import { User,UserDocument } from 'src/users/models/users.model';
+ import { Admin, AdminDocument } from '../models/admins.model';
  import { AdminSignInInput } from '../inputs/admin-signIn.input';
  import { AdminAuthResponse } from '../dto/adminAuthResponse';
  import { InjectModel } from "@nestjs/mongoose";
@@ -15,7 +15,7 @@ import { InvalidCredentialsException } from "src/utility/exceptions/invalid.cred
 
 @Injectable()
 export class SignIn{
-   constructor(@InjectModel(User.name) private readonly userModel: Model<UserDocument>){}
+   constructor(@InjectModel(Admin.name) private readonly userModel: Model<AdminDocument>){}
 
    async signin(adminInput: AdminSignInInput):Promise<AdminAuthResponse>{
   this.validateInput(adminInput)
