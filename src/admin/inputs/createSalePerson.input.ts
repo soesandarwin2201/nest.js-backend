@@ -1,4 +1,5 @@
-import { IsNotEmpty,IsPhoneNumber, IsEmail, Length} from "class-validator"
+import { IsNotEmpty,IsPhoneNumber, IsEmail, Length, Validate,} from "class-validator"
+import { PasswordValidator } from "src/utility/auth/password.validator"
 
 export class CreateSalePersonInput{
    @IsNotEmpty({ message: "FullName is required"})
@@ -13,4 +14,8 @@ export class CreateSalePersonInput{
    @IsNotEmpty({ message: 'Phone number is required' })
    @IsPhoneNumber(null, { message: 'Invalid phone number' })
    phone: string;
+
+   @IsNotEmpty({ message: "Password is required"})
+   @Validate(PasswordValidator, { message: "Password need to match with requirement"})
+   password: string
 }
