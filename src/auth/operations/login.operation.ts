@@ -16,7 +16,7 @@ export class AuthLogin{
   async login(loginInput:  LoginInput):Promise<AuthResponse>{
    this.validateInput(loginInput)
 
-   const user =  await this.userModel.findOne({ phone: loginInput.phone}).select('phone').exec()
+   const user =  await this.userModel.findOne({ phone: loginInput.phone}).exec()
    if (!user) {
       throw new InvalidCredentialsException();
     }

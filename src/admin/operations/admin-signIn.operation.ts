@@ -1,5 +1,4 @@
 import {
-   BadRequestException,
    HttpException,
    HttpStatus,
    Injectable,
@@ -20,11 +19,12 @@ export class SignIn{
 
    async signin(adminInput: AdminSignInInput):Promise<AdminAuthResponse>{
   this.validateInput(adminInput)
-  const user = await this.userModel.findOne({ phone: adminInput.phone}).select('phone').exec()
+  const user = await this.userModel.findOne({ phone: adminInput.phone}).exec()
   if (!user) {
    throw new InvalidCredentialsException();
  }
  const isMatch = await bcrypt.compare(adminInput.password, user.password)
+ console.log("is match or not", isMatch)
  if(!isMatch){
    throw new InvalidCredentialsException();
  }
@@ -46,6 +46,7 @@ export class SignIn{
        };
 
     }catch(error){
+      console.log(adminInput)
       console.log(error)
       if (error instanceof mongoose.Error) {
          throw new HttpException(
