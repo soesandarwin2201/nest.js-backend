@@ -3,7 +3,7 @@ import { AdminService } from './admin.service';
 import { AdminController } from './admin.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from 'src/users/models/users.model';
-import { AdminSignUp } from './operations/admin-singup.operation';
+import { AdminSignUp } from './operations/admin-signup.operation';
 
 @Module({
   imports: [
