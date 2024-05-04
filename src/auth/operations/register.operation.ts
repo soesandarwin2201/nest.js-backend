@@ -4,7 +4,7 @@ import {
    HttpStatus,
    Injectable,
  } from '@nestjs/common';
- import mongoose, { Model } from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 import { RegisterInput } from "../inputs/register.input";
 import { InjectModel } from "@nestjs/mongoose";
 import { User, UserDocument } from "src/users/models/users.model";
@@ -18,6 +18,7 @@ export class Register{
  constructor(@InjectModel(User.name) private readonly userModel: Model<UserDocument>){}
 
  async register(registerInput: RegisterInput): Promise<AuthResponse>{
+  
    const findEmail = await this.userModel.findOne({email: registerInput.email}).select('email').exec()
    if(findEmail){
       throw new BadRequestException('Email already existed')
