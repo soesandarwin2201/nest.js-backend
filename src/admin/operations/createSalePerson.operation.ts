@@ -24,7 +24,7 @@ export class CreateSalePerson {
     saleInput: CreateSalePersonInput): Promise<AdminAuthResponse>{
     const admin = await this.adminModel.findById(adminId)
     console.log(admin, "this is admin for test")
-    if (!adminId && !admin) {
+    if (!admin) {
       throw new UnauthorizedException('You are not authorized to create the sale account');
     }
 
