@@ -4,6 +4,7 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { AdminModule } from './admin/admin.module';
 import { SalePersonModule } from './sale-person/sale-person.module';
+import { CompanyModule } from './company/company.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { SalePersonModule } from './sale-person/sale-person.module';
     AuthModule,
     AdminModule,
     SalePersonModule,
+    CompanyModule,
   ],
   controllers: [],
   providers: [],

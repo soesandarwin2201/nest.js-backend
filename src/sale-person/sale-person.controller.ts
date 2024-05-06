@@ -1,5 +1,5 @@
 import { Controller, Post , Body, Get, Query,   ParseIntPipe,Request} from '@nestjs/common';
-import { ApiQuery, ApiTags, ApiResponse } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import { SalePersonService } from './sale-person.service';
 import { SuccessResponse } from 'src/utility/constant/Response.input';
 import { SalePersonSignInInput } from './input/saleperson-signIn.input';
@@ -15,7 +15,7 @@ export class SalePersonController {
       return this.saleService.salePersonSignIn(input)
    }
 
-   @Get('getAllMarkets')
+   @Get('getAllSalePerson')
   async getAllMarkets(
     @Query('offset', new ParseIntPipe()) offset: number,
     @Query('limit', new ParseIntPipe()) limit: number,
